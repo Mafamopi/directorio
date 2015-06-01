@@ -7,6 +7,11 @@ package directorio.view;
 
 
 import directorio.mensajes.Messages;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import directorio.cotroller.DirectorioController;
+import directorio.cotroller.dto.ContactDTO;
 
 
 /**
@@ -15,8 +20,10 @@ import directorio.mensajes.Messages;
  */
 public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
-    
-    
+    DirectorioController _controller = DirectorioController.getDirectorioController();
+    ContactDTO _obj = new ContactDTO();
+    int y=100;
+ 
     /**
      * Creates new form principal
      */
@@ -28,6 +35,10 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnChange.setText(msg.getMessage("MainScreen.label.change"));
+        btnfuntion.setVisible(false);
+        this.btnfuntionActionPerformed(null);
+        
+        //this.update(getGraphics());
     }
 
     /**
@@ -57,6 +68,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnChange = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        btnfuntion = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -142,10 +154,17 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
+            .addGap(0, 28, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("contactos", jPanel2);
+
+        btnfuntion.setText("jButton1");
+        btnfuntion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfuntionActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -162,7 +181,9 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnfuntion))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -176,7 +197,8 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnChange))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,9 +214,11 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChange))
-                .addGap(37, 37, 37)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnfuntion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -215,13 +239,12 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-       System.out.print("este es"+comboLanguage.getSelectedItem().toString());
+
        Messages.Language = comboLanguage.getSelectedItem().toString();
-       Messages msg = Messages.getMessagesRetriever();
-       jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
-        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
-        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
-        btnChange.setText(msg.getMessage("MainScreen.label.change"));
+       jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
+        btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
+        btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
+        btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
     }//GEN-LAST:event_btnChangeActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
@@ -231,6 +254,22 @@ public class MainScreen extends javax.swing.JFrame {
     private void comboLanguageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboLanguageMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_comboLanguageMouseClicked
+
+    private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
+        
+        for(int i =0; i<_controller.getAllContacts().size();i++){
+            javax.swing.JButton _label = new JButton();
+            _obj = _controller.getAllContacts().get(i);
+            _label.setText(_obj.getContactname());
+            _label.setLocation(100, y);
+            _label.setSize(100,50);
+            _label.setVisible(true);
+            this.add(_label);
+            y=y+50;
+        }
+        this.update(getGraphics());
+        
+    }//GEN-LAST:event_btnfuntionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,6 +317,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnChange;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnfuntion;
     private javax.swing.JComboBox comboLanguage;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFrame jFrame1;
