@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class CreateEdit extends javax.swing.JFrame {
  
     
-    /**
+    /**ut
      * Creates new form crear
      */
     public CreateEdit() {
