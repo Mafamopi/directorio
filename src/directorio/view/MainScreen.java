@@ -21,8 +21,8 @@ import directorio.cotroller.dto.ContactDTO;
 public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
     DirectorioController _controller = DirectorioController.getDirectorioController();
-    ContactDTO _obj = new ContactDTO();
-    int y=100;
+    ContactDTO _contactDTO = new ContactDTO();
+    int y=0;
  
     /**
      * Creates new form principal
@@ -154,7 +154,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("contactos", jPanel2);
@@ -216,9 +216,9 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btnChange))
                 .addGap(18, 18, 18)
                 .addComponent(btnfuntion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,8 +240,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
 
-       Messages.Language = comboLanguage.getSelectedItem().toString();
-       jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
+        Messages.Language = comboLanguage.getSelectedItem().toString();
+        jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
         btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
         btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
         btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
@@ -258,13 +258,14 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
         
         for(int i =0; i<_controller.getAllContacts().size();i++){
-            javax.swing.JButton _label = new JButton();
-            _obj = _controller.getAllContacts().get(i);
-            _label.setText(_obj.getContactname());
-            _label.setLocation(100, y);
-            _label.setSize(100,50);
-            _label.setVisible(true);
-            this.add(_label);
+            javax.swing.JButton contact = new JButton();
+            _contactDTO = _controller.getAllContacts().get(i);
+            contact.setText(_contactDTO.getContactname());
+            contact.setLocation(0, y);
+            contact.setSize(100,50);
+            contact.setVisible(true);
+            //this.add(contact);
+            jPanel2.add(contact);
             y=y+50;
         }
         this.update(getGraphics());
