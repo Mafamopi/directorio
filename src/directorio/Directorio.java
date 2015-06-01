@@ -8,6 +8,8 @@ package directorio;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
+import directorio.view.MainScreen;
+import org.omg.CORBA.Principal;
 
 /**
  *
@@ -15,18 +17,13 @@ import directorio.mensajes.Messages;
  */
 public class Directorio {
     
-    final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.congig";
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // PRUEBA TRAER TODOS LOS CONTACTOS
-        DirectorioController controller = DirectorioController.getDirectorioController();
-        Messages msg = Messages.getMessagesRetriever();
-        for(ContactDTO contact : controller.getAllContacts())
-        {
-            System.out.println(msg.getMessage("test.message") + contact.getContactid() + " " + contact.getContactname());
-        }
+
+        MainScreen mainScreen = new MainScreen();
     }
     
 }
