@@ -5,8 +5,9 @@
  */
 package directorio.view;
 
-import directorio.cotroller.DirectorioController;
+
 import directorio.mensajes.Messages;
+
 
 /**
  *
@@ -14,18 +15,18 @@ import directorio.mensajes.Messages;
  */
 public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
-
-    private static Messages msg = Messages.getMessagesRetriever();
+    
+    
     /**
      * Creates new form principal
      */
     public MainScreen() {
         initComponents();
         this.setVisible(true);
-        jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
-        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
-        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
-        
+//        jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
+//        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
+//        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
+//        
     }
 
     /**
@@ -93,6 +94,11 @@ public class MainScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Español", "Ingles" }));
+        comboLanguage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboLanguageMouseClicked(evt);
+            }
+        });
         comboLanguage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboLanguageActionPerformed(evt);
@@ -120,7 +126,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("cambio");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -131,11 +137,11 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGap(0, 446, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 141, Short.MAX_VALUE)
+            .addGap(0, 205, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("contactos", jPanel2);
@@ -155,7 +161,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -164,13 +170,13 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
+                        .addComponent(jLLanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLLanguage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,16 +187,13 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btnSearch)
                     .addComponent(jLLanguage)
                     .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1)))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(37, 37, 37)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,7 +201,6 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         CreateEdit _crear = new CreateEdit();
-        
         _crear.setVisible(true);
        
     }//GEN-LAST:event_btnAddMouseClicked
@@ -212,12 +214,21 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       System.out.print("este es"+comboLanguage.getSelectedIndex()); 
+       System.out.print("este es"+comboLanguage.getSelectedItem().toString());
+       Messages.Language = comboLanguage.getSelectedItem().toString();
+       Messages msg = Messages.getMessagesRetriever();
+       jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
+        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
+        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
         
     }//GEN-LAST:event_comboLanguageActionPerformed
+
+    private void comboLanguageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboLanguageMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboLanguageMouseClicked
 
     /**
      * @param args the command line arguments

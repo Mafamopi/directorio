@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
  * @author caliche
  */
 public class CreateEdit extends javax.swing.JFrame {
-    private static Messages msg = Messages.getMessagesRetriever();
+ 
+    
     /**
      * Creates new form crear
      */
     public CreateEdit() {
         initComponents();
+        Messages msg = Messages.getMessagesRetriever();
         lbCreateName.setText(msg.getMessage("create.label.name"));
         lbCrearTelefono.setText(msg.getMessage("create.label.phone"));
         btnGrabar.setLabel(msg.getMessage("create.label.add"));
@@ -61,6 +63,11 @@ public class CreateEdit extends javax.swing.JFrame {
         });
 
         btnCrearCancelar.setLabel("Cancelar");
+        btnCrearCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrearCancelarMouseClicked(evt);
+            }
+        });
         btnCrearCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCancelarActionPerformed(evt);
@@ -121,6 +128,10 @@ public class CreateEdit extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnGrabarMouseClicked
+
+    private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearCancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
