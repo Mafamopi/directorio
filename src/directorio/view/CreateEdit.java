@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateEdit extends javax.swing.JFrame {
  
-    
+    Messages msg2 = Messages.getMessagesRetriever();
     /**ut
      * Creates new form crear
      */
@@ -123,7 +123,7 @@ public class CreateEdit extends javax.swing.JFrame {
         if(!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())){
             //TODO:codigo para grabar nuevo contacto
         }else{
-            JOptionPane.showMessageDialog(null, "campo obligatotias");
+            JOptionPane.showMessageDialog(null, "campo obligatorias");
         }
         
         
