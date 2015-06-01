@@ -14,15 +14,18 @@ import javax.swing.JOptionPane;
  * @author caliche
  */
 public class CreateEdit extends javax.swing.JFrame {
-    
+    private static Messages msg = Messages.getMessagesRetriever();
     /**
      * Creates new form crear
      */
     public CreateEdit() {
         initComponents();
-        lbCreateName.setText(msg.getMessage("create.edit.name.label"));
+        lbCreateName.setText(msg.getMessage("create.label.name"));
+        lbCrearTelefono.setText(msg.getMessage("create.label.phone"));
+        btnGrabar.setLabel(msg.getMessage("create.label.add"));
+        btnCrearCancelar.setLabel(msg.getMessage("create.label.cancel"));
     }
-    private static Messages msg = Messages.getMessagesRetriever();
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

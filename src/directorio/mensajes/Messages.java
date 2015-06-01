@@ -63,7 +63,9 @@ public class Messages {
     
     public String getMessage(String key)
     {
+        
         return resourceBundle.getString(key);
+        
     }
     
 }
