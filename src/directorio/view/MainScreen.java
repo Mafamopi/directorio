@@ -258,15 +258,25 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
         
         for(int i =0; i<_controller.getAllContacts().size();i++){
-            javax.swing.JButton contact = new JButton();
+            javax.swing.JLabel name = new JLabel();
+            javax.swing.JLabel phone = new JLabel();
             _contactDTO = _controller.getAllContacts().get(i);
-            contact.setText(_contactDTO.getContactname());
-            contact.setLocation(0, y);
-            contact.setSize(100,50);
-            contact.setVisible(true);
-            //this.add(contact);
-            jPanel2.add(contact);
-            y=y+50;
+  
+            name.setText(_contactDTO.getContactname());
+            phone.setText(""+_contactDTO.getContactid());
+            System.out.println(""+_contactDTO.getContactid());
+            name.setLocation(50, y);
+            phone.setLocation(12, y);
+            
+            name.setSize(200,20);
+            phone.setSize(50, 20);
+            
+            name.setVisible(true);
+            phone.setVisible(true);
+//this.add(contact);
+            jPanel2.add(name);
+            jPanel2.add(phone);
+            y=y+20;
         }
         this.update(getGraphics());
         
