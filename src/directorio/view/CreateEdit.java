@@ -5,6 +5,8 @@
  */
 package directorio.view;
 
+import directorio.cotroller.DirectorioController;
+import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
 import java.awt.TextField;
 import javax.swing.JOptionPane;
@@ -120,13 +122,26 @@ public class CreateEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearCancelarActionPerformed
 
     private void btnGrabarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrabarMouseClicked
-        if(!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())){
+           if (!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())) {
             //TODO:codigo para grabar nuevo contacto
-        }else{
-            JOptionPane.showMessageDialog(null, "campo obligatorias");
+            ContactDTO contacto = new ContactDTO(); //No use entidades en la vista. Para eso use mejor el DTO y en el controlador crea la entidad.
+            try {
+                //Asi conseguimos el name y se lo colocamos al objeto DTO para guardarlo
+                String name = txtCrearNombre.getText();
+                String phone = txtCrearTelefono.getText();
+                contacto.setContactname(name);
+                contacto.setContacphone(phone);
+                //Aqui llamo al controlador para guardar el contacto
+                DirectorioController controller = DirectorioController.getDirectorioController();
+                controller.addContact(contacto);
+                JOptionPane.showMessageDialog(null, msg2.getMessage("message.addcontact.success"));
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, msg2.getMessage("message.addcontact.error"));
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "campo obligatotias");
         }
-        
-        
     }//GEN-LAST:event_btnGrabarMouseClicked
 
     private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked

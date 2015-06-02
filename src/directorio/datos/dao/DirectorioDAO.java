@@ -33,6 +33,13 @@ public class DirectorioDAO {
         return DirectorioDAO.directorioDAO;
     }  
     
+    public void addContact(Contact nuevo) throws Exception {
+        em.getTransaction().begin();
+        em.persist(nuevo);
+        em.getTransaction().commit();
+        em.close();
+    }
+    
     public List<Contact> getAllContacts()
     {
         Query query = em.createQuery("SELECT c FROM Contact c");

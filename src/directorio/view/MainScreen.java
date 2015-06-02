@@ -271,7 +271,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_comboLanguageMouseClicked
 
     public String pantallaEditar(){
-        System.out.println("entro");
+        
         return "entro";
     }
     
@@ -320,7 +320,7 @@ public class MainScreen extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnfuntionActionPerformed
-
+   
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         CreateEdit _crear = new CreateEdit();
