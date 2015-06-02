@@ -36,6 +36,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnChange.setText(msg.getMessage("MainScreen.label.change"));
         btnfuntion.setVisible(false);
+       
         this.btnfuntionActionPerformed(null);
         
         //this.update(getGraphics());
@@ -159,7 +160,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("contactos", jPanel2);
 
-        btnfuntion.setText("jButton1");
         btnfuntion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnfuntionActionPerformed(evt);
@@ -218,7 +218,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(btnfuntion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,22 +259,35 @@ public class MainScreen extends javax.swing.JFrame {
         
         for(int i =0; i<_controller.getAllContacts().size();i++){
             javax.swing.JLabel name = new JLabel();
+            javax.swing.JLabel id = new JLabel();
             javax.swing.JLabel phone = new JLabel();
+            javax.swing.JButton btnUpdate = new JButton();
+            
             _contactDTO = _controller.getAllContacts().get(i);
-  
+            
             name.setText(_contactDTO.getContactname());
-            phone.setText(""+_contactDTO.getContactid());
-            System.out.println(""+_contactDTO.getContactid());
+            id.setText(""+_contactDTO.getContactid());
+            phone.setText(_contactDTO.getContacphone());
+            btnUpdate.setText("editar");
+            
             name.setLocation(50, y);
-            phone.setLocation(12, y);
+            id.setLocation(12, y);
+            phone.setLocation(200,y);
+            btnUpdate.setLocation(300, y);
             
             name.setSize(200,20);
-            phone.setSize(50, 20);
+            id.setSize(50, 20);
+            phone.setSize(100,20);
+            btnUpdate.setSize(100, 20);
             
             name.setVisible(true);
+            id.setVisible(true);
             phone.setVisible(true);
-//this.add(contact);
+            btnUpdate.setVisible(true);
+            
+            jPanel2.add(btnUpdate);
             jPanel2.add(name);
+            jPanel2.add(id);
             jPanel2.add(phone);
             y=y+20;
         }

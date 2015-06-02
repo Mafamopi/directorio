@@ -12,12 +12,16 @@ package directorio.cotroller.dto;
 public class ContactDTO {
     private String contactname;
     private Integer contactid;
+    private String contacphone;
     private boolean contactenable;
-
+    
+    
     public String getContactname() {
         return contactname;
     }
 
+    
+    
     public void setContactname(String contactname) {
         this.contactname = contactname;
     }
@@ -36,6 +40,14 @@ public class ContactDTO {
 
     public void setContactenable(boolean contactenable) {
         this.contactenable = contactenable;
+    }
+
+    public String getContacphone() {
+        return contacphone;
+    }
+
+    public void setContacphone(String contacphone) {
+        this.contacphone = contacphone;
     }
     
     

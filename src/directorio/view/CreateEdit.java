@@ -130,7 +130,7 @@ public class CreateEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGrabarMouseClicked
 
     private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_btnCrearCancelarMouseClicked
 
 

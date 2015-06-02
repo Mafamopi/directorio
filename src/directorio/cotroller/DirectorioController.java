@@ -43,6 +43,7 @@ public class DirectorioController {
             c.setContactname(contact.getContactname());
             c.setContactid(contact.getContactid());
             c.setContactenable(contact.getContactenable());
+            c.setContacphone(contact.getContactphone());
             contacts.add(c);
         }
         return contacts;
