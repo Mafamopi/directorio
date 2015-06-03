@@ -48,7 +48,5 @@ public class ContactDTO {
 
     public void setContacphone(String contacphone) {
         this.contacphone = contacphone;
-    }
-    
-    
+    }   
 }

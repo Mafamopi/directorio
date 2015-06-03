@@ -49,7 +49,7 @@ public class DirectorioDAO {
     
     public List<Contact> getAllContacts()
     {
-        Query query = em.createQuery("SELECT c FROM Contact c");
+        Query query = em.createQuery("SELECT c FROM Contact c order by c.contactname ASC");
         return (List<Contact>) query.getResultList();
-    }
+    }    
 }
