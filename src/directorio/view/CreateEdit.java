@@ -15,20 +15,31 @@ import javax.swing.JOptionPane;
  * @author caliche
  */
 public class CreateEdit extends javax.swing.JFrame {
- 
-    Messages msg2 = Messages.getMessagesRetriever();
-    /**ut
-     * Creates new form crear
+
+    Messages msg = Messages.getMessagesRetriever();
+    private boolean isUpdate = false;
+    private ContactDTO contact = null;
+
+    /**
+     * ut Creates new form crear
      */
     public CreateEdit() {
         initComponents();
-        Messages msg = Messages.getMessagesRetriever();
         lbCreateName.setText(msg.getMessage("create.label.name"));
         lbCrearTelefono.setText(msg.getMessage("create.label.phone"));
         btnGrabar.setLabel(msg.getMessage("create.label.add"));
         btnCrearCancelar.setLabel(msg.getMessage("create.label.cancel"));
+        
+        this.setVisible(true);
+        
+        contact = new ContactDTO();
     }
     
+    public void refreshContactForm()
+    {
+        txtCrearNombre.setText(contact.getContactname());
+        txtCrearTelefono.setText(contact.getContacphone());
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,22 +132,29 @@ public class CreateEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearCancelarActionPerformed
 
     private void btnGrabarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrabarMouseClicked
-           if (!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())) {
+        if (!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())) {
             //TODO:codigo para grabar nuevo contacto
-            ContactDTO contacto = new ContactDTO(); //No use entidades en la vista. Para eso use mejor el DTO y en el controlador crea la entidad.
             try {
                 //Asi conseguimos el name y se lo colocamos al objeto DTO para guardarlo
                 String name = txtCrearNombre.getText();
                 String phone = txtCrearTelefono.getText();
-                contacto.setContactname(name);
-                contacto.setContacphone(phone);
+                contact.setContactname(name);
+                contact.setContacphone(phone);
                 //Aqui llamo al controlador para guardar el contacto
                 DirectorioController controller = DirectorioController.getDirectorioController();
-                controller.addContact(contacto);
-                JOptionPane.showMessageDialog(null, msg2.getMessage("message.addcontact.success"));
+                if(isUpdate)
+                {
+                    controller.editContact(contact);
+                }
+                else
+                {
+                    controller.addContact(contact);
+                }
+                
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
                 this.dispose();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, msg2.getMessage("message.addcontact.error"));
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));
             }
         } else {
             JOptionPane.showMessageDialog(null, "campo obligatotias");
@@ -147,6 +165,22 @@ public class CreateEdit extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearCancelarMouseClicked
 
+    public boolean isIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(boolean isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
+    public ContactDTO getContact() {
+        return contact;
+    }
+
+    public void setContact(ContactDTO contact) {
+        this.contact = contact;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnCrearCancelar;

@@ -48,18 +48,22 @@ public class DirectorioController {
         }
         return contacts;
     }
-    
-    public String verifycontact(){
         
-        return "";
-    }
-    
     public void addContact(ContactDTO obj) throws Exception {
         Contact contact = new Contact();
         contact.setContactname(obj.getContactname());
         contact.setContactenable(true);
         contact.setContactphone(obj.getContacphone());
         dao.addContact(contact);
+    }
+    
+    public void editContact(ContactDTO obj) throws Exception {
+        Contact contact = new Contact();
+        contact.setContactid(obj.getContactid());
+        contact.setContactname(obj.getContactname());
+        contact.setContactenable(true);
+        contact.setContactphone(obj.getContacphone());
+        dao.editContact(contact);
     }
     
 }

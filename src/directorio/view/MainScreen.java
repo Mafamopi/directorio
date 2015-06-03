@@ -12,8 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
+import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
+import javax.swing.event.MouseInputListener;
 
 
 /**
@@ -23,7 +26,7 @@ import javax.swing.JCheckBox;
 public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
     DirectorioController _controller = DirectorioController.getDirectorioController();
-    ContactDTO _contactDTO = new ContactDTO();
+    private ContactDTO currentContact = null;
     int y=0;
  
     /**
@@ -277,20 +280,20 @@ public class MainScreen extends javax.swing.JFrame {
     
     private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
         
-        for(int i =0; i<_controller.getAllContacts().size();i++){
+        List<ContactDTO> contactList =  _controller.getAllContacts();
+        for(ContactDTO contact : contactList){
             javax.swing.JLabel name = new JLabel();
             javax.swing.JLabel id = new JLabel();
             javax.swing.JLabel phone = new JLabel();
             javax.swing.JButton btnUpdate = new JButton();
             javax.swing.JCheckBox chEnable = new JCheckBox();
-            _contactDTO = _controller.getAllContacts().get(i);
             
-            name.setText(_contactDTO.getContactname());
-            id.setText(""+_contactDTO.getContactid());
-            phone.setText(_contactDTO.getContacphone());
+            name.setText(contact.getContactname());
+            id.setText(""+contact.getContactid());
+            phone.setText(contact.getContacphone());
             btnUpdate.setText("editar");
             
-            btnUpdate.setModel(jButton1.getModel());
+            //btnUpdate.setModel(jButton1.getModel());
                     
             name.setLocation(50, y);
             id.setLocation(12, y);
@@ -315,12 +318,27 @@ public class MainScreen extends javax.swing.JFrame {
             jPanel2.add(phone);
             jPanel2.add(chEnable);
             y=y+20;
+            
+            //Agrega el evento al botón update
+            addEditEvent(btnUpdate, contact);
         }
         this.update(getGraphics());
         
         
     }//GEN-LAST:event_btnfuntionActionPerformed
-   
+    private void addEditEvent(JButton updateButton, final ContactDTO contact)
+    {
+        updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                CreateEdit createEdit = new CreateEdit();
+                createEdit.setIsUpdate(true);
+                createEdit.setContact(contact);
+                createEdit.refreshContactForm();
+            }
+        });
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         CreateEdit _crear = new CreateEdit();

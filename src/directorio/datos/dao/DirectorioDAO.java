@@ -40,6 +40,13 @@ public class DirectorioDAO {
         em.close();
     }
     
+    public void editContact(Contact existe) throws Exception {
+        em.getTransaction().begin();
+        em.merge(existe);
+        em.getTransaction().commit();
+        em.close();
+    }
+    
     public List<Contact> getAllContacts()
     {
         Query query = em.createQuery("SELECT c FROM Contact c");
