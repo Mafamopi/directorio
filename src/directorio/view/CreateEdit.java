@@ -8,7 +8,6 @@ package directorio.view;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
-import java.awt.TextField;
 import javax.swing.JOptionPane;
 
 /**
