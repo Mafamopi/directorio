@@ -19,12 +19,14 @@ public class CreateEdit extends javax.swing.JFrame {
     Messages msg = Messages.getMessagesRetriever();
     private boolean isUpdate = false;
     private ContactDTO contact = null;
-
+    MainScreen _main ;
     /**
      * ut Creates new form crear
      */
-    public CreateEdit() {
+    public CreateEdit(MainScreen main) {
+        
         initComponents();
+        _main = main;
         lbCreateName.setText(msg.getMessage("create.label.name"));
         lbCrearTelefono.setText(msg.getMessage("create.label.phone"));
         btnGrabar.setLabel(msg.getMessage("create.label.add"));
@@ -57,9 +59,7 @@ public class CreateEdit extends javax.swing.JFrame {
         btnGrabar = new java.awt.Button();
         btnCrearCancelar = new java.awt.Button();
 
-        setMaximumSize(new java.awt.Dimension(200, 200));
         setMinimumSize(new java.awt.Dimension(300, 200));
-        setPreferredSize(new java.awt.Dimension(300, 200));
         setResizable(false);
 
         lbCreateName.setMinimumSize(new java.awt.Dimension(200, 200));
@@ -127,8 +127,7 @@ public class CreateEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCancelarActionPerformed
-        CreateEdit _crear = new CreateEdit();
-        _crear.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCrearCancelarActionPerformed
 
     private void btnGrabarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrabarMouseClicked
@@ -145,13 +144,13 @@ public class CreateEdit extends javax.swing.JFrame {
                 if(isUpdate)
                 {
                     controller.editContact(contact);
-                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.edit"));
                 }
                 else
                 {
                     controller.addContact(contact);
-                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
-                }                                
+                }
+                _main.paintList();
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));

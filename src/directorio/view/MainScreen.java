@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.Action;
@@ -28,7 +29,7 @@ public class MainScreen extends javax.swing.JFrame {
     DirectorioController _controller = DirectorioController.getDirectorioController();
     private ContactDTO currentContact = null;
     int y=0;
- 
+    MainScreen _main = this;
     /**
      * Creates new form principal
      */
@@ -42,7 +43,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnChange.setText(msg.getMessage("MainScreen.label.change"));
         btnfuntion.setVisible(false);
        
-        this.btnfuntionActionPerformed(null);
+        this.paintList();
         
         //this.update(getGraphics());
     }
@@ -161,7 +162,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 263, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("contactos", jPanel2);
@@ -194,29 +195,31 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnfuntion)
+                        .addGap(20, 20, 20))
+                    .addComponent(jTabbedPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtBuscarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addComponent(jLLanguage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnChange))
-                        .addGap(66, 66, 66))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnfuntion)
-                        .addGap(20, 20, 20))
-                    .addComponent(jTabbedPane2)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(162, 162, 162))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLLanguage)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnChange)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)))
+                        .addGap(66, 66, 66))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,25 +235,14 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChange))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jTabbedPane2))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        CreateEdit _crear = new CreateEdit();
-        _crear.setVisible(true);
-       
-    }//GEN-LAST:event_btnAddMouseClicked
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         
@@ -273,13 +265,10 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboLanguageMouseClicked
 
-    public String pantallaEditar(){
-        
-        return "entro";
-    }
-    
-    private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
-        
+    //este metodo resetear la lista
+    public void paintList(){
+        this.y =0;
+        jPanel2.removeAll();
         List<ContactDTO> contactList =  _controller.getAllContacts();
         for(ContactDTO contact : contactList){
             javax.swing.JLabel name = new JLabel();
@@ -293,7 +282,7 @@ public class MainScreen extends javax.swing.JFrame {
             phone.setText(contact.getContacphone());
             btnUpdate.setText("editar");
             
-            //btnUpdate.setModel(jButton1.getModel());
+           // btnUpdate.setModel(jButton1.getModel());
                     
             name.setLocation(50, y);
             id.setLocation(12, y);
@@ -325,12 +314,13 @@ public class MainScreen extends javax.swing.JFrame {
         this.update(getGraphics());
         
         
-    }//GEN-LAST:event_btnfuntionActionPerformed
-    private void addEditEvent(JButton updateButton, final ContactDTO contact)
+    }
+        private void addEditEvent(JButton updateButton, final ContactDTO contact)
     {
+        
         updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                CreateEdit createEdit = new CreateEdit();
+                final CreateEdit createEdit = new CreateEdit(_main);
                 createEdit.setIsUpdate(true);
                 createEdit.setContact(contact);
                 createEdit.refreshContactForm();
@@ -341,9 +331,23 @@ public class MainScreen extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        CreateEdit _crear = new CreateEdit();
+        CreateEdit _crear = new CreateEdit(this);
         _crear.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        CreateEdit _crear = new CreateEdit(this);
+        _crear.setVisible(true);
+            
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
+
+    }//GEN-LAST:event_btnfuntionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,6 +374,14 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

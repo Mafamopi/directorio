@@ -37,14 +37,14 @@ public class DirectorioDAO {
         em.getTransaction().begin();
         em.persist(nuevo);
         em.getTransaction().commit();
-        em.close();
+//        em.close();
     }
     
     public void editContact(Contact existe) throws Exception {
         em.getTransaction().begin();
         em.merge(existe);
         em.getTransaction().commit();
-        em.close();
+//        em.close();
     }
     
     public List<Contact> getAllContacts()
