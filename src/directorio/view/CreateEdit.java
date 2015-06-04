@@ -144,13 +144,14 @@ public class CreateEdit extends javax.swing.JFrame {
                 if(isUpdate)
                 {
                     controller.editContact(contact);
+                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.edit"));
                 }
                 else
                 {
                     controller.addContact(contact);
+                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
                 }
-                _main.paintList();
-                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
+                _main.paintList();                
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));
