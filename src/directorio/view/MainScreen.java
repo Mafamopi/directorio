@@ -28,6 +28,7 @@ public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
     DirectorioController _controller = DirectorioController.getDirectorioController();
     private ContactDTO currentContact = null;
+    Messages msg = Messages.getMessagesRetriever();
     int y=0;
     MainScreen _main = this;
     /**
@@ -35,8 +36,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        this.setVisible(true);
-        Messages msg = Messages.getMessagesRetriever();
+        this.setVisible(true);        
         jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
@@ -73,7 +73,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnChange = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jTabbedcontact = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         btnfuntion = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -165,7 +165,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGap(0, 263, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("contactos", jPanel2);
+        jTabbedcontact.addTab("contactos", jPanel2);
 
         btnfuntion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +199,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnfuntion)
                         .addGap(20, 20, 20))
-                    .addComponent(jTabbedPane2)
+                    .addComponent(jTabbedcontact)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -238,7 +238,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(jTabbedPane2))
+                .addComponent(jTabbedcontact))
         );
 
         pack();
@@ -255,6 +255,7 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
         btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
         btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
+        this.paintList();
     }//GEN-LAST:event_btnChangeActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
@@ -280,7 +281,7 @@ public class MainScreen extends javax.swing.JFrame {
             name.setText(contact.getContactname());
             id.setText(""+contact.getContactid());
             phone.setText(contact.getContacphone());
-            btnUpdate.setText("editar");
+            btnUpdate.setText(Messages.getMessagesRetriever().getMessage("MainScren.button"));
             
            // btnUpdate.setModel(jButton1.getModel());
                     
@@ -306,8 +307,7 @@ public class MainScreen extends javax.swing.JFrame {
             jPanel2.add(id);
             jPanel2.add(phone);
             jPanel2.add(chEnable);
-            y=y+20;
-            
+            y=y+20;       
             //Agrega el evento al botón update
             addEditEvent(btnUpdate, contact);
         }
@@ -419,8 +419,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane6;
+    private javax.swing.JTabbedPane jTabbedcontact;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBuscarContacto;
     // End of variables declaration//GEN-END:variables
