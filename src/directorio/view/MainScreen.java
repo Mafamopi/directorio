@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.FileLanguageManage;
 import directorio.cotroller.dto.ContactDTO;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -37,6 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        this.center();
         this.setVisible(true);
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
@@ -44,10 +47,11 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             
         }
-        jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
-        btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
-        btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
-        btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
+        msg = Messages.getMessagesRetriever();
+        jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
+        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
+        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
+        btnChange.setText(msg.getMessage("MainScreen.label.change"));
         btnfuntion.setVisible(false);
         
         this.paintList();
@@ -84,9 +88,6 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnfuntion = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -169,7 +170,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGap(0, 284, Short.MAX_VALUE)
         );
 
         jTabbedcontact.addTab("contactos", jPanel2);
@@ -186,14 +187,6 @@ public class MainScreen extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,10 +251,11 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
 
         Messages.Language = comboLanguage.getSelectedItem().toString();
-        jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
-        btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
-        btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
-        btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
+        msg = Messages.getMessagesRetriever();
+        jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
+        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
+        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
+        btnChange.setText(msg.getMessage("MainScreen.label.change"));
         this.paintList();
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
@@ -295,7 +289,7 @@ public class MainScreen extends javax.swing.JFrame {
             name.setText(contact.getContactname());
             id.setText(""+contact.getContactid());
             phone.setText(contact.getContacphone());
-            btnUpdate.setText(Messages.getMessagesRetriever().getMessage("MainScren.button"));
+            btnUpdate.setText(msg.getMessage("MainScren.button"));
             
            // btnUpdate.setModel(jButton1.getModel());
                     
@@ -413,6 +407,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
     }
 
+    private void center()
+    {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnChange;
@@ -423,9 +422,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLLanguage;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;

@@ -8,6 +8,8 @@ package directorio.view;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -181,6 +183,11 @@ public class CreateEdit extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearCancelarMouseClicked
 
+    private void center()
+    {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+    }
     public boolean isIsUpdate() {
         return isUpdate;
     }
