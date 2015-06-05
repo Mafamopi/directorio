@@ -66,6 +66,9 @@ public class CreateEdit extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(300, 200));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -193,6 +196,10 @@ public class CreateEdit extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         _main.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        _main.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
 
     private void center()
     {
