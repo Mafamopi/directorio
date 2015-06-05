@@ -132,49 +132,48 @@ public class CreateEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearCancelarActionPerformed
 
     private void btnGrabarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrabarMouseClicked
-        if (!"".equals(txtCrearNombre.getText()) && !"".equals(txtCrearTelefono.getText())) {
-            //TODO:codigo para grabar nuevo contacto
-            try {
-                //Asi conseguimos el name y se lo colocamos al objeto DTO para guardarlo
-                String name = txtCrearNombre.getText();
-                String phone = txtCrearTelefono.getText();
-                contact.setContactname(name);
-                contact.setContacphone(phone);
-                //Aqui llamo al controlador para guardar el contacto
-                DirectorioController controller = DirectorioController.getDirectorioController();
-                List<ContactDTO> contactList = controller.getAllContacts();
-                boolean con = false;
-
-                for (int i = 0; i < contactList.size(); i++) {
-                    if (name.equals(contactList.get(i).getContactname())) {
-                        con = true;
-                    }
-                }
-                int sizeName = name.length();
-                if (con == false) {
-                    if (sizeName < 49) {
-                        if (isUpdate) {
-                            controller.editContact(contact);
-                            JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.edit"));
-                        } else {
-                            controller.addContact(contact);
-                            JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
-                        }
-                        _main.paintList();
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.sizename"));
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.exist"));
-                    con = false;
-                }
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));
+        try {
+            //Asi conseguimos el name y se lo colocamos al objeto DTO para guardarlo
+            String name = txtCrearNombre.getText();
+            String phone = txtCrearTelefono.getText();
+            if(name.trim().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.validation.name.error"));
+                return;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "campo obligatotias");
+            if(phone.trim().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.validation.phone.error"));
+                return;
+            }
+            contact.setContactname(name);
+            contact.setContacphone(phone);
+            //Aqui llamo al controlador para guardar el contacto
+            DirectorioController controller = DirectorioController.getDirectorioController();
+
+            int sizeName = name.length();
+            if (name.trim().equals(contact.getContactname().trim()) || !controller.contactNameExists(name)) {
+                if (sizeName < 49) {
+                    if (isUpdate) {
+                        controller.editContact(contact);
+                        JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.edit"));
+                    } else {
+                        controller.addContact(contact);
+                        JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
+                    }
+                    _main.paintList();
+                    
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.sizename"));
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.exist"));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnGrabarMouseClicked
 

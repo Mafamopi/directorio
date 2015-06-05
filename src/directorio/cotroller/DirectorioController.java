@@ -65,5 +65,8 @@ public class DirectorioController {
         contact.setContactphone(obj.getContacphone());
         dao.editContact(contact);
     }
-    
+    public boolean contactNameExists(String contactName) throws Exception
+    {
+       return dao.contactNameExists(contactName);
+    }
 }

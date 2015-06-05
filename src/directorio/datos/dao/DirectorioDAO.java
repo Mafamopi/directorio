@@ -52,4 +52,13 @@ public class DirectorioDAO {
         Query query = em.createQuery("SELECT c FROM Contact c order by c.contactname ASC");
         return (List<Contact>) query.getResultList();
     }    
+    
+    public boolean contactNameExists(String contactName) throws Exception
+    {
+        contactName = contactName.trim();
+        String queryString = "SELECT c.contactid FROM Contact c WHERE c.contactname = :contactName";
+        Query query = em.createQuery(queryString);
+        query.setParameter("contactName", contactName);
+        return !query.getResultList().isEmpty();
+    }
 }
