@@ -348,6 +348,10 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         CreateEdit _crear = new CreateEdit(this);
+        ContactDTO contact = new ContactDTO();
+        contact.setContactname("");
+        contact.setContacphone("");
+        _crear.setContact(contact);
         _crear.setVisible(true);
             
     }//GEN-LAST:event_btnAddMouseClicked
