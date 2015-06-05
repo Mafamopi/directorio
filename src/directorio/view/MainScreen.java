@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import directorio.cotroller.DirectorioController;
+import directorio.cotroller.FileLanguageManage;
 import directorio.cotroller.dto.ContactDTO;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
@@ -36,13 +37,19 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        this.setVisible(true);        
-        jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
-        btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
-        btnSearch.setText(msg.getMessage("MainScreen.label.search"));
-        btnChange.setText(msg.getMessage("MainScreen.label.change"));
+        this.setVisible(true);
+        try {
+            FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
+            Messages.Language = file.getLanguage();
+        } catch (Exception e) {
+            
+        }
+        jLLanguage.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.language"));
+        btnAdd.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.addContact"));
+        btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
+        btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
         btnfuntion.setVisible(false);
-       
+        
         this.paintList();
         
         //this.update(getGraphics());
@@ -256,6 +263,13 @@ public class MainScreen extends javax.swing.JFrame {
         btnSearch.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.search"));
         btnChange.setText(Messages.getMessagesRetriever().getMessage("MainScreen.label.change"));
         this.paintList();
+        try {
+            FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
+            file.setLanguage(Messages.Language);
+        } catch (Exception e) {
+        }
+        
+                
     }//GEN-LAST:event_btnChangeActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
