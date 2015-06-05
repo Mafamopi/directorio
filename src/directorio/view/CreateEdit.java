@@ -39,6 +39,7 @@ public class CreateEdit extends javax.swing.JFrame {
 
         contact = new ContactDTO();
         center();
+        this.setAlwaysOnTop(true);
     }
 
     public void refreshContactForm() {
@@ -64,6 +65,11 @@ public class CreateEdit extends javax.swing.JFrame {
 
         setMinimumSize(new java.awt.Dimension(300, 200));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lbCreateName.setMinimumSize(new java.awt.Dimension(200, 200));
         lbCreateName.setText("Nombre");
@@ -183,6 +189,10 @@ public class CreateEdit extends javax.swing.JFrame {
     private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_btnCrearCancelarMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        _main.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
     private void center()
     {

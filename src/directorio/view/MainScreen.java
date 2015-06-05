@@ -331,6 +331,7 @@ public class MainScreen extends javax.swing.JFrame {
                 createEdit.setIsUpdate(true);
                 createEdit.setContact(contact);
                 createEdit.refreshContactForm();
+                _main.setEnabled(false);
             }
         });
     }
@@ -353,7 +354,7 @@ public class MainScreen extends javax.swing.JFrame {
         contact.setContacphone("");
         _crear.setContact(contact);
         _crear.setVisible(true);
-            
+        _main.setEnabled(false);
     }//GEN-LAST:event_btnAddMouseClicked
 
     /**
