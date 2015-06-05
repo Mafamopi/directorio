@@ -38,22 +38,26 @@ public class MainScreen extends javax.swing.JFrame {
      * Creates new form principal
      */
     public MainScreen() {
-        initComponents();
-        this.center();
-        this.setVisible(true);
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
-            Messages.Language = file.getLanguage();
+            Messages.language = file.getLanguage();
         } catch (Exception e) {
             
         }
         msg = Messages.getMessagesRetriever();
+        initComponents();
+        this.center();
+        this.setVisible(true);
         jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnChange.setText(msg.getMessage("MainScreen.label.change"));
-        btnfuntion.setVisible(false);
-        
+        jTabbedcontact.removeTabAt(0);
+        jTabbedcontact.addTab(msg.getMessage("MainScreen.label.contacts"), jPanel2);
+        if(Messages.language.equals("Inglés") || Messages.language.equals("English"))
+        {
+            comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
+        }
         this.paintList();
         
         //this.update(getGraphics());
@@ -86,7 +90,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnChange = new javax.swing.JButton();
         jTabbedcontact = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        btnfuntion = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
@@ -122,7 +125,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Español", "Ingles" }));
+        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Español", "Inglés" }));
         comboLanguage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 comboLanguageMouseClicked(evt);
@@ -175,12 +178,6 @@ public class MainScreen extends javax.swing.JFrame {
 
         jTabbedcontact.addTab("contactos", jPanel2);
 
-        btnfuntion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnfuntionActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,10 +192,6 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnfuntion)
-                        .addGap(20, 20, 20))
                     .addComponent(jTabbedcontact)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,8 +217,7 @@ public class MainScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnfuntion)
-                .addGap(2, 2, 2)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
@@ -250,16 +242,23 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
 
-        Messages.Language = comboLanguage.getSelectedItem().toString();
+        Messages.language = comboLanguage.getSelectedItem().toString();
         msg = Messages.getMessagesRetriever();
         jLLanguage.setText(msg.getMessage("MainScreen.label.language"));
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnChange.setText(msg.getMessage("MainScreen.label.change"));
+        jTabbedcontact.removeTabAt(0);
+        jTabbedcontact.addTab(msg.getMessage("MainScreen.label.contacts"), jPanel2);
+        comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Español", "Inglés" }));
+        if(Messages.language.equals("Inglés") || Messages.language.equals("English"))
+        {
+            comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
+        }
         this.paintList();
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
-            file.setLanguage(Messages.Language);
+            file.setLanguage(Messages.language);
         } catch (Exception e) {
         }
         
@@ -353,10 +352,6 @@ public class MainScreen extends javax.swing.JFrame {
             
     }//GEN-LAST:event_btnAddMouseClicked
 
-    private void btnfuntionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfuntionActionPerformed
-
-    }//GEN-LAST:event_btnfuntionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -416,7 +411,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnChange;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnfuntion;
     private javax.swing.JComboBox comboLanguage;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

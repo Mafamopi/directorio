@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class Messages {
     
     final private ResourceBundle resourceBundle;
-    public static String Language;
+    public static String language;
     final private static String MESSAGES_SPANISH = "directorio.mensajes.application_es";
     final private static String MESSAGES_ENGLISH = "directorio.mensajes.application_en";
     
@@ -40,7 +40,7 @@ public class Messages {
     {
         //Aquí se debe implementar la verificación del último idioma seleccionado
         //por el usuario. Por ahora se coloca "es" mientras el método se implementa.
-        if("Ingles".equals(Language)){
+        if("Inglés".equals(language) || "English".equals(language)){
             return "en";
         }
         return "es";

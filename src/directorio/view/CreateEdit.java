@@ -10,7 +10,6 @@ import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +38,7 @@ public class CreateEdit extends javax.swing.JFrame {
         this.setVisible(true);
 
         contact = new ContactDTO();
+        center();
     }
 
     public void refreshContactForm() {
@@ -148,13 +148,14 @@ public class CreateEdit extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.validation.phone.error"));
                 return;
             }
-            contact.setContactname(name);
-            contact.setContacphone(phone);
+            
             //Aqui llamo al controlador para guardar el contacto
             DirectorioController controller = DirectorioController.getDirectorioController();
 
             int sizeName = name.length();
             if (name.trim().equals(contact.getContactname().trim()) || !controller.contactNameExists(name)) {
+                contact.setContactname(name);
+                contact.setContacphone(phone);
                 if (sizeName < 49) {
                     if (isUpdate) {
                         controller.editContact(contact);
