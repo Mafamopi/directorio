@@ -61,4 +61,16 @@ public class DirectorioDAO {
         query.setParameter("contactName", contactName);
         return !query.getResultList().isEmpty();
     }
+    
+    public List<Contact> getActiveContacts()
+    {
+        Query query = em.createQuery("SELECT c FROM Contact c WHERE c.contactenable = 1  ORDER BY c.contactname ASC");
+        return (List<Contact>) query.getResultList();
+    }
+    
+    public List<Contact> getInactiveContacts()
+    {
+        Query query = em.createQuery("SELECT c FROM Contact c WHERE c.contactenable = 0 ORDER BY c.contactname ASC");
+        return (List<Contact>) query.getResultList();
+    }
 }
