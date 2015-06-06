@@ -173,7 +173,7 @@ public class CreateEdit extends javax.swing.JFrame {
                         controller.addContact(contact);
                         JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
                     }
-                    _main.paintList();
+                    _main.paintList(controller.getActiveContacts());
                     
                     this.dispose();
                 } else {
