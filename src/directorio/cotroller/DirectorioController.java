@@ -36,6 +36,22 @@ public class DirectorioController {
     public List<ContactDTO> getAllContacts()
     {
         List<Contact> contactEntities =  dao.getAllContacts();
+        return convertListDao2Dto(contactEntities);
+    }
+    
+    public List<ContactDTO> getActiveContacts()
+    {
+        List<Contact> contactEntities =  dao.getActiveContacts();
+        return convertListDao2Dto(contactEntities);
+    }
+    
+    public List<ContactDTO> getInactiveContacts()
+    {
+        List<Contact> contactEntities =  dao.getInactiveContacts();
+        return convertListDao2Dto(contactEntities);
+    }
+    
+    private List<ContactDTO> convertListDao2Dto(List<Contact> contactEntities){
         List<ContactDTO> contacts = new ArrayList<ContactDTO>();
         for(Contact contact : contactEntities)
         {
