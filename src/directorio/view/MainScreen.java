@@ -58,7 +58,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList();
+        this.paintList(_controller.getActiveContacts());
         
         //this.update(getGraphics());
     }
@@ -255,7 +255,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList();
+        this.paintList(_controller.getActiveContacts());
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
             file.setLanguage(Messages.language);
@@ -274,10 +274,9 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_comboLanguageMouseClicked
 
     //este metodo resetear la lista
-    public void paintList(){
+    public void paintList(List<ContactDTO> contactList){
         this.y =0;
         jPanel2.removeAll();
-        List<ContactDTO> contactList =  _controller.getAllContacts();
         for(ContactDTO contact : contactList){
             javax.swing.JLabel name = new JLabel();
             javax.swing.JLabel id = new JLabel();
