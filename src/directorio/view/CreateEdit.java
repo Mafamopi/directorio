@@ -39,7 +39,6 @@ public class CreateEdit extends javax.swing.JFrame {
 
         contact = new ContactDTO();
         center();
-        this.setAlwaysOnTop(true);
     }
 
     public void refreshContactForm() {
@@ -190,17 +189,21 @@ public class CreateEdit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGrabarMouseClicked
 
     private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnCrearCancelarMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        _main.setEnabled(true);
+        enableMainScreen();
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        _main.setEnabled(true);
+        enableMainScreen();
     }//GEN-LAST:event_formWindowClosed
 
+    private void enableMainScreen()
+    {
+        _main.setEnabled(true);
+    }
     private void center()
     {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
