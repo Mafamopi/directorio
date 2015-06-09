@@ -59,7 +59,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList(_controller.getActiveContacts());
+        this.paintList(this.jPanel2,_controller.getActiveContacts());
         
         //this.update(getGraphics());
     }
@@ -267,7 +267,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList(_controller.getActiveContacts());
+        this.paintList(this.jPanel2,_controller.getActiveContacts());
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
             file.setLanguage(Messages.language);
@@ -286,7 +286,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_comboLanguageMouseClicked
 
     //este metodo resetear la lista
-    public void paintList(List<ContactDTO> contactList){
+    public void paintList(JPanel panel, List<ContactDTO> contactList){
         this.y =0;
         jPanel2.removeAll();
         List<ContactDTO> contacts = new ArrayList<ContactDTO>();
@@ -353,11 +353,11 @@ public class MainScreen extends javax.swing.JFrame {
         
         enableButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                //TODO: Crear logica para que para desactivar un contacto
+                ContactPainter contactPainter = new ContactPainter(_main);
                 try {                   
                     contact.setContactenable(false);
                     _controller.setContactAsInactive(contact);
-                    paintList(null);
+                    contactPainter.buildContactList(jPanel2, null);
                 } catch (Exception e) {
                     
                 }
@@ -387,7 +387,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
         List<ContactDTO> contacts = _controller.findContactByCharName(txtFindContact.getText());
-        this.paintList(contacts);
+        this.paintList(this.jPanel2,contacts);
     }//GEN-LAST:event_txtFindContactKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -474,4 +474,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtFindContact;
     // End of variables declaration//GEN-END:variables
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+    
 }
