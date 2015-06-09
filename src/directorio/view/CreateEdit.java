@@ -84,6 +84,11 @@ public class CreateEdit extends javax.swing.JFrame {
                 btnGrabarMouseClicked(evt);
             }
         });
+        btnGrabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrabarActionPerformed(evt);
+            }
+        });
 
         btnCrearCancelar.setLabel("Cancelar");
         btnCrearCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,7 +177,7 @@ public class CreateEdit extends javax.swing.JFrame {
                         controller.addContact(contact);
                         JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.success"));
                     }
-                    _main.paintList(controller.getActiveContacts());
+                    _main.showFilterContacts();
                     
                     this.dispose();
                 } else {
@@ -199,6 +204,10 @@ public class CreateEdit extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         enableMainScreen();
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void enableMainScreen()
     {

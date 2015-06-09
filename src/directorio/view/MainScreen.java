@@ -375,7 +375,11 @@ public class MainScreen extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         this.txtFindContactKeyReleased(null);
     }//GEN-LAST:event_btnSearchActionPerformed
-
+    
+    public void showFilterContacts(){
+        this.txtFindContactKeyReleased(null);
+    }
+    
     /**
      * @param args the command line arguments
      */
