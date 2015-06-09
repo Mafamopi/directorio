@@ -6,6 +6,7 @@
 package directorio.datos.dao;
 
 import directorio.datos.entidades.Contact;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -56,7 +57,7 @@ public class DirectorioDAO {
     public boolean contactNameExists(String contactName) throws Exception
     {
         contactName = contactName.trim();
-        String queryString = "SELECT c.contactid FROM Contact c WHERE c.contactname = :contactName";
+        String queryString = "SELECT c.contactid FROM Contact c WHERE lower(c.contactname) = lower(:contactName)";
         Query query = em.createQuery(queryString);
         query.setParameter("contactName", contactName);
         return !query.getResultList().isEmpty();
@@ -72,5 +73,15 @@ public class DirectorioDAO {
     {
         Query query = em.createQuery("SELECT c FROM Contact c WHERE c.contactenable = 0 ORDER BY c.contactname ASC");
         return (List<Contact>) query.getResultList();
+    }
+    
+    public List<Contact> findContactsByCharName(String name)
+    {
+        Query query = em.createQuery("SELECT c FROM Contact c WHERE c.contactenable = 1 AND lower(c.contactname) LIKE lower(:charName) ORDER BY c.contactname ASC");
+        query.setParameter("charName", "%"+name+"%");
+        return query.getResultList();
+        
+            
+        
     }
 }

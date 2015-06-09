@@ -64,7 +64,17 @@ public class DirectorioController {
         }
         return contacts;
     }
-        
+    
+    public List<ContactDTO> findContactByCharName(String charName){
+        List<Contact> contacts = dao.findContactsByCharName(charName);
+        return convertListDao2Dto(contacts);
+    }
+    
+    public void setContactAsInactive(ContactDTO contact) throws Exception{
+        contact.setContactenable(false);
+        this.editContact(contact);
+    }
+
     public void addContact(ContactDTO obj) throws Exception {
         Contact contact = new Contact();
         contact.setContactname(obj.getContactname());
@@ -77,7 +87,7 @@ public class DirectorioController {
         Contact contact = new Contact();
         contact.setContactid(obj.getContactid());
         contact.setContactname(obj.getContactname());
-        contact.setContactenable(true);
+        contact.setContactenable(obj.isContactenable());
         contact.setContactphone(obj.getContacphone());
         dao.editContact(contact);
     }

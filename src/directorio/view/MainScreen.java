@@ -84,7 +84,7 @@ public class MainScreen extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         comboLanguage = new javax.swing.JComboBox();
         jLLanguage = new javax.swing.JLabel();
-        txtBuscarContacto = new javax.swing.JTextField();
+        txtFindContact = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnChange = new javax.swing.JButton();
@@ -139,6 +139,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLLanguage.setText("Idioma");
 
+        txtFindContact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFindContactKeyReleased(evt);
+            }
+        });
+
         btnAdd.setText("Agregar Contacto");
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,6 +161,11 @@ public class MainScreen extends javax.swing.JFrame {
         btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSearchMouseClicked(evt);
+            }
+        });
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -196,7 +207,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtBuscarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFindContact, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -219,7 +230,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFindContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(jLLanguage)
                     .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -356,6 +367,15 @@ public class MainScreen extends javax.swing.JFrame {
         _main.setEnabled(false);
     }//GEN-LAST:event_btnAddMouseClicked
 
+    private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
+        List<ContactDTO> contacts = _controller.findContactByCharName(txtFindContact.getText());
+        this.paintList(contacts);
+    }//GEN-LAST:event_txtFindContactKeyReleased
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        this.txtFindContactKeyReleased(null);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -430,6 +450,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTabbedPane jTabbedcontact;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtBuscarContacto;
+    private javax.swing.JTextField txtFindContact;
     // End of variables declaration//GEN-END:variables
 }
