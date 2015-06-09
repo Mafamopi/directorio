@@ -290,49 +290,44 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2.removeAll();
         for(ContactDTO contact : contactList){
             javax.swing.JLabel name = new JLabel();
-            javax.swing.JLabel id = new JLabel();
             javax.swing.JLabel phone = new JLabel();
             javax.swing.JButton btnUpdate = new JButton();
-            javax.swing.JCheckBox chEnable = new JCheckBox();
+            javax.swing.JButton btnEnable = new JButton();
             
             name.setText(contact.getContactname());
-            id.setText(""+contact.getContactid());
             phone.setText(contact.getContacphone());
             btnUpdate.setText(msg.getMessage("MainScren.button"));
-            
+            btnEnable.setText(msg.getMessage("MainScren.button.enable"));
            // btnUpdate.setModel(jButton1.getModel());
                     
-            name.setLocation(50, y);
-            id.setLocation(12, y);
-            phone.setLocation(200,y);
-            btnUpdate.setLocation(300, y);
-            chEnable.setLocation(400, y);
+            name.setLocation(0, y);
+            phone.setLocation(150,y);
+            btnUpdate.setLocation(250, y);
+            btnEnable.setLocation(350, y);
             
             name.setSize(200,20);
-            id.setSize(50, 20);
             phone.setSize(100,20);
             btnUpdate.setSize(100, 20);
-            chEnable.setSize(50, 20);
+            btnEnable.setSize(100, 20);
             
             name.setVisible(true);
-            id.setVisible(true);
             phone.setVisible(true);
             btnUpdate.setVisible(true);
             
             jPanel2.add(btnUpdate);
             jPanel2.add(name);
-            jPanel2.add(id);
             jPanel2.add(phone);
-            jPanel2.add(chEnable);
+            jPanel2.add(btnEnable);
             y=y+20;       
             //Agrega el evento al botón update
             addEditEvent(btnUpdate, contact);
+            addDisableEvent(btnEnable, contact);
         }
         this.update(getGraphics());
         
         
     }
-        private void addEditEvent(JButton updateButton, final ContactDTO contact)
+    private void addEditEvent(JButton updateButton, final ContactDTO contact)
     {
         
         updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -346,6 +341,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
     }
     
+    private void addDisableEvent(JButton enableButton, final ContactDTO contact){
+        
+        enableButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                //TODO: Crear logica para que para desactivar un contacto
+            }
+        });
+    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
