@@ -155,13 +155,7 @@ public class CreateEdit extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.validation.name.error"));
                 return;
-            }
-            if(phone.trim().equals(""))
-            {
-                JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.validation.phone.error"));
-                return;
-            }
-            
+            }            
             //Aqui llamo al controlador para guardar el contacto
             DirectorioController controller = DirectorioController.getDirectorioController();
 
