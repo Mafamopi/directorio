@@ -250,7 +250,9 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
-        
+        this.txtFindContact.setText("");
+        _contactPainter.buildContactList(jPanel2, null);
+        this.update(getGraphics());
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
