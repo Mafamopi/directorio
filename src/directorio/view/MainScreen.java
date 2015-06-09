@@ -310,8 +310,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
         List<ContactDTO> contacts = _controller.findContactByCharName(txtFindContact.getText());
-        _contactPainter.buildContactList(this.jPanel2,contacts);
+        
+        if(!contacts.isEmpty()){
+            _contactPainter.buildContactList(this.jPanel2,contacts);
+            
+        }else{
+            jPanel2.removeAll();
+            JLabel label = new JLabel();
+            label.setText(msg.getMessage("message.search.null"));
+            label.setLocation(0,0);
+            label.setSize(200,20);
+            label.setVisible(true);
+            this.jPanel2.add(label);
+        }
         this.update(getGraphics());
+        
     }//GEN-LAST:event_txtFindContactKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
