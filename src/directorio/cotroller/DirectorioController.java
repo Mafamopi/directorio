@@ -74,6 +74,11 @@ public class DirectorioController {
         contact.setContactenable(false);
         this.editContact(contact);
     }
+    
+    public void setContactAsActive(ContactDTO contact) throws Exception{
+        contact.setContactenable(true);
+        this.editContact(contact);
+    }
 
     public void addContact(ContactDTO obj) throws Exception {
         Contact contact = new Contact();
