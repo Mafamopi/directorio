@@ -62,7 +62,7 @@ public class MainScreen extends javax.swing.JFrame {
         }
         _contactPainter.buildContactList(this.jPanel2,_controller.getActiveContacts());
         
-        //this.update(getGraphics());
+        this.update(getGraphics());
     }
 
     /**
@@ -268,7 +268,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList(this.jPanel2,_controller.getActiveContacts());
+        _contactPainter.buildContactList(this.jPanel2,_controller.getActiveContacts());
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
             file.setLanguage(Messages.language);
@@ -285,58 +285,6 @@ public class MainScreen extends javax.swing.JFrame {
     private void comboLanguageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboLanguageMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_comboLanguageMouseClicked
-
-    //este metodo resetear la lista
-    public void paintList(JPanel panel, List<ContactDTO> contactList){
-//        this.y =0;
-//        jPanel2.removeAll();
-//        List<ContactDTO> contacts = new ArrayList<ContactDTO>();
-//        if(contactList != null){
-//            contacts = contactList;
-//        }else{
-//            contacts=_controller.getActiveContacts();
-//        }
-//        
-//        for(ContactDTO contact : contacts){
-//            javax.swing.JLabel name = new JLabel();
-//            javax.swing.JLabel phone = new JLabel();
-//            javax.swing.JButton btnUpdate = new JButton();
-//            javax.swing.JButton btnEnable = new JButton();
-//            
-//            name.setText(contact.getContactname());
-//            phone.setText(contact.getContacphone());
-//            btnUpdate.setText(msg.getMessage("MainScren.button"));
-//            btnEnable.setText(msg.getMessage("MainScren.button.enable"));
-//           // btnUpdate.setModel(jButton1.getModel());
-//                    
-//            name.setLocation(0, y);
-//            phone.setLocation(150,y);
-//            btnUpdate.setLocation(250, y);
-//            btnEnable.setLocation(350, y);
-//            
-//            name.setSize(200,20);
-//            phone.setSize(100,20);
-//            btnUpdate.setSize(100, 20);
-//            btnEnable.setSize(100, 20);
-//            
-//            name.setVisible(true);
-//            phone.setVisible(true);
-//            btnUpdate.setVisible(true);
-//            
-//            jPanel2.add(btnUpdate);
-//            jPanel2.add(name);
-//            jPanel2.add(phone);
-//            jPanel2.add(btnEnable);
-//            y=y+20;       
-//            //Agrega el evento al botón update
-//            addEditEvent(btnUpdate, contact);
-//            addDisableEvent(btnEnable, contact);
-//        }
-//        this.update(getGraphics());
-//        
-//        
-    }
-   
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
@@ -455,5 +403,14 @@ public class MainScreen extends javax.swing.JFrame {
     public void setjPanel2(JPanel jPanel2) {
         this.jPanel2 = jPanel2;
     }
+
+    public ContactPainter getContactPainter() {
+        return _contactPainter;
+    }
+
+    public void setContactPainter(ContactPainter _contactPainter) {
+        this._contactPainter = _contactPainter;
+    }
+    
     
 }

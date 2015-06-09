@@ -185,6 +185,8 @@ public class CreateEdit extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, msg.getMessage("message.addcontact.error"));
             e.printStackTrace();
         }
+        _main.getContactPainter().buildContactList(_main.getjPanel2(), null);
+        _main.update(_main.getGraphics());
     }//GEN-LAST:event_btnGrabarMouseClicked
 
     private void btnCrearCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearCancelarMouseClicked
