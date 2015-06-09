@@ -35,6 +35,7 @@ public class MainScreen extends javax.swing.JFrame {
     Messages msg = Messages.getMessagesRetriever();
     int y=0;
     MainScreen _main = this;
+    ContactPainter _contactPainter = new ContactPainter(_main);
     /**
      * Creates new form principal
      */
@@ -59,7 +60,7 @@ public class MainScreen extends javax.swing.JFrame {
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        this.paintList(this.jPanel2,_controller.getActiveContacts());
+        _contactPainter.buildContactList(this.jPanel2,_controller.getActiveContacts());
         
         //this.update(getGraphics());
     }
@@ -287,83 +288,55 @@ public class MainScreen extends javax.swing.JFrame {
 
     //este metodo resetear la lista
     public void paintList(JPanel panel, List<ContactDTO> contactList){
-        this.y =0;
-        jPanel2.removeAll();
-        List<ContactDTO> contacts = new ArrayList<ContactDTO>();
-        if(contactList != null){
-            contacts = contactList;
-        }else{
-            contacts=_controller.getActiveContacts();
-        }
-        
-        for(ContactDTO contact : contacts){
-            javax.swing.JLabel name = new JLabel();
-            javax.swing.JLabel phone = new JLabel();
-            javax.swing.JButton btnUpdate = new JButton();
-            javax.swing.JButton btnEnable = new JButton();
-            
-            name.setText(contact.getContactname());
-            phone.setText(contact.getContacphone());
-            btnUpdate.setText(msg.getMessage("MainScren.button"));
-            btnEnable.setText(msg.getMessage("MainScren.button.enable"));
-           // btnUpdate.setModel(jButton1.getModel());
-                    
-            name.setLocation(0, y);
-            phone.setLocation(150,y);
-            btnUpdate.setLocation(250, y);
-            btnEnable.setLocation(350, y);
-            
-            name.setSize(200,20);
-            phone.setSize(100,20);
-            btnUpdate.setSize(100, 20);
-            btnEnable.setSize(100, 20);
-            
-            name.setVisible(true);
-            phone.setVisible(true);
-            btnUpdate.setVisible(true);
-            
-            jPanel2.add(btnUpdate);
-            jPanel2.add(name);
-            jPanel2.add(phone);
-            jPanel2.add(btnEnable);
-            y=y+20;       
-            //Agrega el evento al botón update
-            addEditEvent(btnUpdate, contact);
-            addDisableEvent(btnEnable, contact);
-        }
-        this.update(getGraphics());
-        
-        
+//        this.y =0;
+//        jPanel2.removeAll();
+//        List<ContactDTO> contacts = new ArrayList<ContactDTO>();
+//        if(contactList != null){
+//            contacts = contactList;
+//        }else{
+//            contacts=_controller.getActiveContacts();
+//        }
+//        
+//        for(ContactDTO contact : contacts){
+//            javax.swing.JLabel name = new JLabel();
+//            javax.swing.JLabel phone = new JLabel();
+//            javax.swing.JButton btnUpdate = new JButton();
+//            javax.swing.JButton btnEnable = new JButton();
+//            
+//            name.setText(contact.getContactname());
+//            phone.setText(contact.getContacphone());
+//            btnUpdate.setText(msg.getMessage("MainScren.button"));
+//            btnEnable.setText(msg.getMessage("MainScren.button.enable"));
+//           // btnUpdate.setModel(jButton1.getModel());
+//                    
+//            name.setLocation(0, y);
+//            phone.setLocation(150,y);
+//            btnUpdate.setLocation(250, y);
+//            btnEnable.setLocation(350, y);
+//            
+//            name.setSize(200,20);
+//            phone.setSize(100,20);
+//            btnUpdate.setSize(100, 20);
+//            btnEnable.setSize(100, 20);
+//            
+//            name.setVisible(true);
+//            phone.setVisible(true);
+//            btnUpdate.setVisible(true);
+//            
+//            jPanel2.add(btnUpdate);
+//            jPanel2.add(name);
+//            jPanel2.add(phone);
+//            jPanel2.add(btnEnable);
+//            y=y+20;       
+//            //Agrega el evento al botón update
+//            addEditEvent(btnUpdate, contact);
+//            addDisableEvent(btnEnable, contact);
+//        }
+//        this.update(getGraphics());
+//        
+//        
     }
-    private void addEditEvent(JButton updateButton, final ContactDTO contact)
-    {
-        
-        updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                final CreateEdit createEdit = new CreateEdit(_main);
-                createEdit.setIsUpdate(true);
-                createEdit.setContact(contact);
-                createEdit.refreshContactForm();
-                _main.setEnabled(false);
-            }
-        });
-    }
-    
-    private void addDisableEvent(JButton enableButton, final ContactDTO contact){
-        
-        enableButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                ContactPainter contactPainter = new ContactPainter(_main);
-                try {                   
-                    contact.setContactenable(false);
-                    _controller.setContactAsInactive(contact);
-                    contactPainter.buildContactList(jPanel2, null);
-                } catch (Exception e) {
-                    
-                }
-            }
-        });
-    }
+   
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
@@ -387,7 +360,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
         List<ContactDTO> contacts = _controller.findContactByCharName(txtFindContact.getText());
-        this.paintList(this.jPanel2,contacts);
+        _contactPainter.buildContactList(this.jPanel2,contacts);
     }//GEN-LAST:event_txtFindContactKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
