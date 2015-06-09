@@ -309,6 +309,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
         List<ContactDTO> contacts = _controller.findContactByCharName(txtFindContact.getText());
         _contactPainter.buildContactList(this.jPanel2,contacts);
+        this.update(getGraphics());
     }//GEN-LAST:event_txtFindContactKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
