@@ -90,6 +90,7 @@ public class ContactPainter {
                     contact.setContactenable(false);
                     _controller.setContactAsInactive(contact);
                     buildContactList(_main.getjPanel2(), null);
+                    _main.update(_main.getGraphics());
                 } catch (Exception e) {
                     
                 }
