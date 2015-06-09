@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
@@ -288,7 +289,14 @@ public class MainScreen extends javax.swing.JFrame {
     public void paintList(List<ContactDTO> contactList){
         this.y =0;
         jPanel2.removeAll();
-        for(ContactDTO contact : contactList){
+        List<ContactDTO> contacts = new ArrayList<ContactDTO>();
+        if(contactList != null){
+            contacts = contactList;
+        }else{
+            contacts=_controller.getActiveContacts();
+        }
+        
+        for(ContactDTO contact : contacts){
             javax.swing.JLabel name = new JLabel();
             javax.swing.JLabel phone = new JLabel();
             javax.swing.JButton btnUpdate = new JButton();
