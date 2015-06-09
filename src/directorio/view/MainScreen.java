@@ -354,6 +354,13 @@ public class MainScreen extends javax.swing.JFrame {
         enableButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 //TODO: Crear logica para que para desactivar un contacto
+                try {                   
+                    contact.setContactenable(false);
+                    _controller.setContactAsInactive(contact);
+                    paintList(null);
+                } catch (Exception e) {
+                    
+                }
             }
         });
     }
