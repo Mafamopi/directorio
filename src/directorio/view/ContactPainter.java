@@ -99,8 +99,34 @@ public class ContactPainter {
     }
     
     public void paintContacts(JPanel panel,List<ContactDTO> contactList,String filtro){
-        for(ContactDTO contacts:contactList){
-            //TODO: crear logica para filtrar el nombre
+        List<ContactDTO> contactListFilter = this.getFilteredContacts(contactList, filtro);
+        if(!contactListFilter.isEmpty()){
+            buildContactList(panel,contactListFilter);
+            
+        }else{
+            panel.removeAll();
+            JLabel label = new JLabel();
+            label.setText(msg.getMessage("message.search.null"));
+            label.setLocation(0,0);
+            label.setSize(200,20);
+            label.setVisible(true);
+            panel.add(label);
         }
+        _main.repaint();
+    }
+    
+    public List<ContactDTO> getFilteredContacts(List<ContactDTO> contactList,String filtro){
+        List<ContactDTO> contactListFilter = new ArrayList<ContactDTO>();
+        if("".equals(filtro)||filtro==null){
+            return contactList;
+        }else{
+            for(ContactDTO contact:contactList){
+            if(contact.getContactname().contains(filtro)){
+                contactListFilter.add(contact);
+                }
+            }
+            return contactListFilter;
+        }
+        
     }
 }
