@@ -64,7 +64,6 @@ public class ContactPainter {
             addEditEvent(btnUpdate, contact);
             addDisableEvent(btnEnable, contact);
         }
-        
     }
     
      private void addEditEvent(JButton updateButton, final ContactDTO contact)
@@ -121,12 +120,11 @@ public class ContactPainter {
             return contactList;
         }else{
             for(ContactDTO contact:contactList){
-            if(contact.getContactname().contains(filtro)){
+                if(contact.getContactname().contains(filtro)){
                 contactListFilter.add(contact);
                 }
             }
             return contactListFilter;
         }
-        
     }
 }
