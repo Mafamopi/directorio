@@ -113,7 +113,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="comboLanguage" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnChange" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnContactsDisable" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -141,7 +141,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnAdd" min="-2" pref="17" max="-2" attributes="0"/>
-                  <Component id="btnChange" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnContactsDisable" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="0" max="-2" attributes="0"/>
@@ -159,6 +159,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboLanguageItemStateChanged"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comboLanguageMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboLanguageActionPerformed"/>
       </Events>
@@ -191,12 +192,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnChange">
+    <Component class="javax.swing.JButton" name="btnContactsDisable">
       <Properties>
         <Property name="text" type="java.lang.String" value="cambio"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContactsDisableActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="jTabbedcontact">
