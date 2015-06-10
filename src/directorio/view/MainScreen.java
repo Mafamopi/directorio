@@ -19,6 +19,8 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 import javax.swing.event.MouseInputListener;
@@ -177,6 +179,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         btnContactsDisable.setText("cambio");
+        btnContactsDisable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnContactsDisableMouseClicked(evt);
+            }
+        });
         btnContactsDisable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContactsDisableActionPerformed(evt);
@@ -261,7 +268,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void btnContactsDisableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactsDisableActionPerformed
-        //TODO: Hacer el llamado de la vista modal de contactos inactivos
+       
     }//GEN-LAST:event_btnContactsDisableActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
@@ -322,6 +329,10 @@ public class MainScreen extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_comboLanguageItemStateChanged
+
+    private void btnContactsDisableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContactsDisableMouseClicked
+        // TODO: hacer el llamado a la vista InactiveContacts
+    }//GEN-LAST:event_btnContactsDisableMouseClicked
     
     public void showFilterContacts(){
         this.txtFindContactKeyReleased(null);
