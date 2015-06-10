@@ -22,14 +22,11 @@ public class ContactPainter {
 //        _mainScreen.paintList(panel,contactList);
         int y =0;
         panel.removeAll();
-        List<ContactDTO> contacts = new ArrayList<ContactDTO>();
-        if(contactList != null){
-            contacts = contactList;
-        }else{
-            contacts=_controller.getActiveContacts();
+        if(contactList == null || contactList.isEmpty()){
+            contactList = _controller.getActiveContacts();
         }
         
-        for(ContactDTO contact : contacts){
+        for(ContactDTO contact : contactList){
             javax.swing.JLabel name = new JLabel();
             javax.swing.JLabel phone = new JLabel();
             javax.swing.JButton btnUpdate = new JButton();
@@ -116,11 +113,11 @@ public class ContactPainter {
     
     public List<ContactDTO> getFilteredContacts(List<ContactDTO> contactList,String filtro){
         List<ContactDTO> contactListFilter = new ArrayList<ContactDTO>();
-        if("".equals(filtro)||filtro==null){
+        if(filtro==null || "".equals(filtro.trim())){
             return contactList;
         }else{
             for(ContactDTO contact:contactList){
-                if(contact.getContactname().contains(filtro)){
+                if(contact.getContactname().toLowerCase().contains(filtro.toLowerCase())){
                 contactListFilter.add(contact);
                 }
             }
