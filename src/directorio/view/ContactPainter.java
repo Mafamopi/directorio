@@ -112,8 +112,9 @@ public class ContactPainter {
     }
     
     public List<ContactDTO> getFilteredContacts(List<ContactDTO> contactList,String filtro){
+        filtro = (filtro == null) ? "" : filtro.trim();
         List<ContactDTO> contactListFilter = new ArrayList<ContactDTO>();
-        if(filtro==null || "".equals(filtro.trim())){
+        if("".equals(filtro)){
             return contactList;
         }else{
             for(ContactDTO contact:contactList){
