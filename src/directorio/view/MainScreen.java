@@ -7,23 +7,12 @@ package directorio.view;
 
 
 import directorio.mensajes.Messages;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.FileLanguageManage;
 import directorio.cotroller.dto.ContactDTO;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Action;
-import javax.swing.JCheckBox;
-import javax.swing.event.MouseInputListener;
 
 
 /**

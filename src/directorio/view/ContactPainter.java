@@ -20,6 +20,7 @@ public class ContactPainter {
     
     public void buildContactList(JPanel panel,List<ContactDTO> contactList){
 //        _mainScreen.paintList(panel,contactList);
+        msg = Messages.getMessagesRetriever();
         int y =0;
         panel.removeAll();
         if(contactList == null || contactList.isEmpty()){
