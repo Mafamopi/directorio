@@ -5,9 +5,21 @@
  */
 package directorio.view;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import directorio.cotroller.DirectorioController;
+import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,6 +29,10 @@ public class InactiveContacts extends javax.swing.JFrame {
 
     private Messages msg = Messages.getMessagesRetriever();
     private MainScreen mainWindow;
+    DirectorioController _controller = DirectorioController.getDirectorioController();  
+    
+    List<ContactDTO> _listContactsAsActive = new ArrayList<ContactDTO>();
+    InactiveContacts inactiveContacts = this;
     /**
      * Creates new form InactiveContacts
      */
@@ -24,11 +40,92 @@ public class InactiveContacts extends javax.swing.JFrame {
         initComponents();
         this.mainWindow = mainWindow;
         center();
+        applyButton.setEnabled(false);
         this.setVisible(true);
+        this.paintInactiveList();
+        this.repaint();
         this.toFront();
     }
-    private void enableMainScreen()
+    
+    public void paintInactiveList(){
+        int y=0;
+        List<ContactDTO> _contacts = _controller.getInactiveContacts();
+        for(ContactDTO contact:_contacts){
+            JLabel labelphone=  new JLabel();
+            JLabel label = new JLabel();
+            JCheckBox chActive=new JCheckBox();
+            label.setText(contact.getContactname());
+            labelphone.setText(contact.getContacphone());
+            label.setSize(200, 20); 
+            labelphone.setSize(200,20);
+            chActive.setSize(100,20);            
+            label.setLocation(10, y);
+            labelphone.setLocation(210, y);
+            chActive.setLocation(350, y);
+            label.setVisible(true);
+            labelphone.setVisible(true);
+            chActive.setVisible(true);
+            y += 20;
+            addActiveContactEvent(label, contact);
+            addCheckBoxContactEvent(chActive, contact);
+            this.jPanelInactive.add(label);
+            this.jPanelInactive.add(labelphone);
+            this.jPanelInactive.add(chActive);
+            
+        }
+    }
+    
+     private void addActiveContactEvent(JLabel updateButton, final ContactDTO contact)
     {
+        
+        updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                List<ContactDTO> listContact=new ArrayList<ContactDTO>();
+                listContact.add(contact);
+                try {
+                    _controller.setContactAsActive(listContact);
+                    inactiveContacts.jPanelInactive.removeAll();
+                    inactiveContacts.paintInactiveList();
+                    inactiveContacts.jPanelInactive.update(getGraphics());
+                    inactiveContacts.repaint();
+                    mainWindow._contactPainter.buildContactList(mainWindow.getjPanel2(), null);
+                    mainWindow.repaint();
+                    mainWindow.setEnabled(true);
+                    inactiveContacts.setVisible(false);
+                } catch (Exception ex) {
+                 
+                }               
+            }
+            
+        });
+    }
+     
+     private void addCheckBoxContactEvent(final JCheckBox checkboxInactive, final ContactDTO contact)
+    {
+        
+        checkboxInactive.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                
+                if(checkboxInactive.isSelected()){
+                    _listContactsAsActive.add(contact);    
+                }
+                if(!checkboxInactive.isSelected()){
+                    _listContactsAsActive.remove(contact);
+                }                
+                if(_listContactsAsActive.isEmpty()){
+                    applyButton.setEnabled(false);
+                }else{
+                    applyButton.setEnabled(true);
+                }
+                
+                
+            }
+            
+        });
+    }
+    
+    private void enableMainScreen()
+    {        
         mainWindow.setEnabled(true);
         mainWindow.toFront();
     }
@@ -48,8 +145,10 @@ public class InactiveContacts extends javax.swing.JFrame {
 
         applyButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jPanelInactive = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 450));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -68,21 +167,34 @@ public class InactiveContacts extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanelInactiveLayout = new javax.swing.GroupLayout(jPanelInactive);
+        jPanelInactive.setLayout(jPanelInactiveLayout);
+        jPanelInactiveLayout.setHorizontalGroup(
+            jPanelInactiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelInactiveLayout.setVerticalGroup(
+            jPanelInactiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 363, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addContainerGap(293, Short.MAX_VALUE)
                 .addComponent(applyButton)
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton)
                 .addGap(91, 91, 91))
+            .addComponent(jPanelInactive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
+                .addComponent(jPanelInactive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(applyButton)
                     .addComponent(cancelButton))
@@ -108,7 +220,7 @@ public class InactiveContacts extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-    public MainScreen getMainWindow() {
+    public MainScreen getMainWindow() {        
         return mainWindow;
     }
 
@@ -119,5 +231,6 @@ public class InactiveContacts extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyButton;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JPanel jPanelInactive;
     // End of variables declaration//GEN-END:variables
 }
