@@ -257,7 +257,8 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchMouseClicked
 
     private void btnContactsDisableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactsDisableActionPerformed
-       
+        InactiveContacts inactiveContactsWindow = new InactiveContacts(_main);
+        _main.setEnabled(false);
     }//GEN-LAST:event_btnContactsDisableActionPerformed
 
     private void comboLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLanguageActionPerformed
