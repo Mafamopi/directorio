@@ -76,10 +76,16 @@ public class DirectorioController {
     }
     
     public void setContactAsActive(List<ContactDTO> contacts) throws Exception{     
-        for(int i =0;i<contacts.size();i++){
-            contacts.get(i).setContactenable(true);
-            this.editContact(contacts.get(i));
+        List<Contact> contactEntities = new ArrayList<Contact>();
+        for(ContactDTO dto : contacts){
+            Contact contact = new Contact();
+            contact.setContactenable(true);
+            contact.setContactid(dto.getContactid());
+            contact.setContactname(dto.getContactname());
+            contact.setContactphone(dto.getContacphone());
+            contactEntities.add(contact);
         }
+        dao.setContactsAsActive(contactEntities);
     }
 
     public void addContact(ContactDTO obj) throws Exception {

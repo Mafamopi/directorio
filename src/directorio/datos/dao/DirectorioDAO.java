@@ -48,6 +48,16 @@ public class DirectorioDAO {
 //        em.close();
     }
     
+    public void setContactsAsActive(List<Contact> contacts) throws Exception
+    {
+        em.getTransaction().begin();
+        for(Contact contact : contacts)
+        {
+            em.merge(contact);
+        }
+        em.getTransaction().commit();
+    }
+    
     public List<Contact> getAllContacts()
     {
         Query query = em.createQuery("SELECT c FROM Contact c order by c.contactname ASC");

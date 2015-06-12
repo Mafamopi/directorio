@@ -34,12 +34,17 @@
               <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
           </Group>
-          <Component id="jPanelInactive" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanelInactive" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jPanelInactive" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -58,6 +63,9 @@
           <Connection code="msg.getMessage(&quot;InactiveContacts.button.apply&quot;)" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="applyButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
@@ -79,7 +87,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="363" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="329" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

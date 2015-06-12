@@ -3,12 +3,14 @@ package directorio.view;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class ContactPainter {
     DirectorioController _controller = DirectorioController.getDirectorioController();
@@ -40,13 +42,15 @@ public class ContactPainter {
            // btnUpdate.setModel(jButton1.getModel());
                     
             name.setLocation(0, y);
-            phone.setLocation(150,y);
-            btnUpdate.setLocation(250, y);
-            btnEnable.setLocation(350, y);
+            phone.setLocation(280,y);
+            btnUpdate.setLocation(380, y);
+            btnEnable.setLocation(450, y);
+            btnUpdate.setMargin(new Insets(2, 2, 2, 2));
+            btnEnable.setMargin(new Insets(2, 2, 2, 2));
             
             name.setSize(200,20);
             phone.setSize(100,20);
-            btnUpdate.setSize(100, 20);
+            btnUpdate.setSize(70, 20);
             btnEnable.setSize(100, 20);
             
             name.setVisible(true);
@@ -62,6 +66,7 @@ public class ContactPainter {
             addEditEvent(btnUpdate, contact);
             addDisableEvent(btnEnable, contact);
         }
+        _main.update(_main.getGraphics());
     }
     
      private void addEditEvent(JButton updateButton, final ContactDTO contact)
@@ -96,6 +101,7 @@ public class ContactPainter {
     }
     
     public void paintContacts(JPanel panel,List<ContactDTO> contactList,String filtro){
+        msg = Messages.getMessagesRetriever();
         List<ContactDTO> contactListFilter = this.getFilteredContacts(contactList, filtro);
         if(!contactListFilter.isEmpty()){
             buildContactList(panel,contactListFilter);
@@ -104,7 +110,7 @@ public class ContactPainter {
             panel.removeAll();
             JLabel label = new JLabel();
             label.setText(msg.getMessage("message.search.null"));
-            label.setLocation(0,0);
+            label.setLocation(200,120);
             label.setSize(200,20);
             label.setVisible(true);
             panel.add(label);

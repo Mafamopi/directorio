@@ -13,6 +13,8 @@ import directorio.cotroller.FileLanguageManage;
 import directorio.cotroller.dto.ContactDTO;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.JScrollPane;
 
 
 /**
@@ -23,6 +25,7 @@ public class MainScreen extends javax.swing.JFrame {
     final static String CONFIGURATION_FILE_PATH = "directorio.mensajes.config";
     DirectorioController _controller = DirectorioController.getDirectorioController();
     private ContactDTO currentContact = null;
+    private List<ContactDTO> activeContacts;
     Messages msg = Messages.getMessagesRetriever();
     int y=0;
     MainScreen _main = this;
@@ -38,6 +41,7 @@ public class MainScreen extends javax.swing.JFrame {
             
         }
         msg = Messages.getMessagesRetriever();
+        
         initComponents();
         this.center();
         this.setVisible(true);
@@ -45,15 +49,15 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnContactsDisable.setText(msg.getMessage("MainScreen.label.change"));
-        jTabbedcontact.removeTabAt(0);
-        jTabbedcontact.addTab(msg.getMessage("MainScreen.label.contacts"), jPanel2);
         if(Messages.language.equals("Inglés") || Messages.language.equals("English"))
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        _contactPainter.buildContactList(this.jPanel2,_controller.getActiveContacts());
+        updateActiveContacts();
+        _contactPainter.buildContactList(this.jPanel2, activeContacts);
         
         this.update(getGraphics());
+        this.setTitle(msg.getMessage("MainScreen.title"));
     }
 
     /**
@@ -81,9 +85,8 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnContactsDisable = new javax.swing.JButton();
-        jTabbedcontact = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -144,6 +147,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         btnAdd.setText("Agregar Contacto");
+        btnAdd.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddMouseClicked(evt);
@@ -156,6 +160,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         btnSearch.setText("Buscar");
+        btnSearch.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSearchMouseClicked(evt);
@@ -179,25 +184,25 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 456, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 284, Short.MAX_VALUE)
-        );
-
-        jTabbedcontact.addTab("contactos", jPanel2);
-
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        JScrollPane js = new JScrollPane(jPanel2);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 312, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,27 +211,27 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedcontact)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtFindContact, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnContactsDisable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(jLLanguage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnContactsDisable)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(96, 96, 96)))
-                        .addGap(66, 66, 66))))
+                                .addGap(18, 18, 18)
+                                .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 142, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,19 +242,24 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btnSearch)
                     .addComponent(jLLanguage)
                     .addComponent(comboLanguage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
                     .addComponent(btnContactsDisable))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jTabbedcontact))
+                .addGap(28, 28, 28)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void updateActiveContacts()
+    {
+        activeContacts = _controller.getActiveContacts();
+    }
     private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         this.txtFindContact.setText("");
         _contactPainter.buildContactList(jPanel2, null);
@@ -290,11 +300,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void txtFindContactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindContactKeyReleased
-        _contactPainter.paintContacts(jPanel2, _controller.getActiveContacts(), txtFindContact.getText());        
+        _contactPainter.paintContacts(jPanel2, activeContacts, txtFindContact.getText());        
     }//GEN-LAST:event_txtFindContactKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        this.txtFindContactKeyReleased(null);
+        //this.txtFindContactKeyReleased(null);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void comboLanguageItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboLanguageItemStateChanged
@@ -304,20 +314,18 @@ public class MainScreen extends javax.swing.JFrame {
         btnAdd.setText(msg.getMessage("MainScreen.label.addContact"));
         btnSearch.setText(msg.getMessage("MainScreen.label.search"));
         btnContactsDisable.setText(msg.getMessage("MainScreen.label.change"));
-        jTabbedcontact.removeTabAt(0);
-        jTabbedcontact.addTab(msg.getMessage("MainScreen.label.contacts"), jPanel2);
         comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Español", "Inglés" }));
         if(Messages.language.equals("Inglés") || Messages.language.equals("English"))
         {
             comboLanguage.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "English", "Spanish" }));
         }
-        _contactPainter.buildContactList(this.jPanel2,_controller.getActiveContacts());
+        _contactPainter.paintContacts(this.jPanel2, activeContacts, txtFindContact.getText());
         try {
             FileLanguageManage file = new FileLanguageManage(CONFIGURATION_FILE_PATH);
             file.setLanguage(Messages.language);
         } catch (Exception e) {
         }
-        
+        _main.setTitle(msg.getMessage("MainScreen.title"));
     }//GEN-LAST:event_comboLanguageItemStateChanged
 
     private void btnContactsDisableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContactsDisableMouseClicked
@@ -400,7 +408,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTabbedPane jTabbedcontact;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtFindContact;
     // End of variables declaration//GEN-END:variables

@@ -15,12 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
@@ -46,6 +42,7 @@ public class InactiveContacts extends javax.swing.JFrame {
         this.paintInactiveList();
         this.repaint();
         this.toFront();
+        this.setTitle(msg.getMessage("InactiveContacts.title"));
     }
 
     public void paintInactiveList() {
@@ -56,6 +53,7 @@ public class InactiveContacts extends javax.swing.JFrame {
             JLabel label = new JLabel();
             JCheckBox chActive = new JCheckBox();
             label.setText(contact.getContactname());
+            label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
             labelphone.setText(contact.getContacphone());
             label.setSize(200, 20);
             labelphone.setSize(200, 20);
@@ -75,7 +73,7 @@ public class InactiveContacts extends javax.swing.JFrame {
 
         }
     }
-
+    
     private void addActiveContactEvent(JLabel updateButton, final ContactDTO contact) {
 
         updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,14 +85,8 @@ public class InactiveContacts extends javax.swing.JFrame {
                 }
                 try {
                     _controller.setContactAsActive(listContact);
-                    inactiveContacts.jPanelInactive.removeAll();
-                    inactiveContacts.paintInactiveList();
-                    inactiveContacts.jPanelInactive.update(getGraphics());
-                    inactiveContacts.repaint();
                     mainWindow._contactPainter.buildContactList(mainWindow.getjPanel2(), null);
-                    mainWindow.repaint();
-                    mainWindow.setEnabled(true);
-                    inactiveContacts.setVisible(false);
+                    inactiveContacts.dispose();
                 } catch (Exception ex) {
 
                 }
@@ -123,6 +115,7 @@ public class InactiveContacts extends javax.swing.JFrame {
     }
 
     private void enableMainScreen() {
+        mainWindow.updateActiveContacts();
         mainWindow.setEnabled(true);
         mainWindow.toFront();
     }
@@ -156,6 +149,11 @@ public class InactiveContacts extends javax.swing.JFrame {
         });
 
         applyButton.setText(msg.getMessage("InactiveContacts.button.apply"));
+        applyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText(msg.getMessage("InactiveContacts.button.cancel"));
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +170,7 @@ public class InactiveContacts extends javax.swing.JFrame {
         );
         jPanelInactiveLayout.setVerticalGroup(
             jPanelInactiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGap(0, 329, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,11 +183,15 @@ public class InactiveContacts extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton)
                 .addGap(91, 91, 91))
-            .addComponent(jPanelInactive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelInactive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jPanelInactive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -212,6 +214,20 @@ public class InactiveContacts extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+        List<ContactDTO> listContact = new ArrayList<ContactDTO>();
+        for (Integer key : _mapContactsAsActive.keySet()) {
+            listContact.add(_mapContactsAsActive.get(key));
+        }
+        try {
+            _controller.setContactAsActive(listContact);
+            mainWindow._contactPainter.buildContactList(mainWindow.getjPanel2(), null);
+            inactiveContacts.dispose();
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_applyButtonActionPerformed
 
     /**
      * @param args the command line arguments

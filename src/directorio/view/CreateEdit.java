@@ -207,6 +207,7 @@ public class CreateEdit extends javax.swing.JFrame {
 
     private void enableMainScreen()
     {
+        _main.updateActiveContacts();
         _main.setEnabled(true);
         _main.toFront();
     }
