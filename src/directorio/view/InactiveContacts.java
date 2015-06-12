@@ -5,7 +5,6 @@
  */
 package directorio.view;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import directorio.cotroller.DirectorioController;
 import directorio.cotroller.dto.ContactDTO;
 import directorio.mensajes.Messages;
@@ -13,7 +12,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -29,10 +30,10 @@ public class InactiveContacts extends javax.swing.JFrame {
 
     private Messages msg = Messages.getMessagesRetriever();
     private MainScreen mainWindow;
-    DirectorioController _controller = DirectorioController.getDirectorioController();  
-    
-    List<ContactDTO> _listContactsAsActive = new ArrayList<ContactDTO>();
+    DirectorioController _controller = DirectorioController.getDirectorioController();
+    Map<Integer, ContactDTO> _mapContactsAsActive = new HashMap<Integer, ContactDTO>();
     InactiveContacts inactiveContacts = this;
+
     /**
      * Creates new form InactiveContacts
      */
@@ -46,19 +47,19 @@ public class InactiveContacts extends javax.swing.JFrame {
         this.repaint();
         this.toFront();
     }
-    
-    public void paintInactiveList(){
-        int y=0;
+
+    public void paintInactiveList() {
+        int y = 0;
         List<ContactDTO> _contacts = _controller.getInactiveContacts();
-        for(ContactDTO contact:_contacts){
-            JLabel labelphone=  new JLabel();
+        for (ContactDTO contact : _contacts) {
+            JLabel labelphone = new JLabel();
             JLabel label = new JLabel();
-            JCheckBox chActive=new JCheckBox();
+            JCheckBox chActive = new JCheckBox();
             label.setText(contact.getContactname());
             labelphone.setText(contact.getContacphone());
-            label.setSize(200, 20); 
-            labelphone.setSize(200,20);
-            chActive.setSize(100,20);            
+            label.setSize(200, 20);
+            labelphone.setSize(200, 20);
+            chActive.setSize(100, 20);
             label.setLocation(10, y);
             labelphone.setLocation(210, y);
             chActive.setLocation(350, y);
@@ -71,17 +72,19 @@ public class InactiveContacts extends javax.swing.JFrame {
             this.jPanelInactive.add(label);
             this.jPanelInactive.add(labelphone);
             this.jPanelInactive.add(chActive);
-            
+
         }
     }
-    
-     private void addActiveContactEvent(JLabel updateButton, final ContactDTO contact)
-    {
-        
+
+    private void addActiveContactEvent(JLabel updateButton, final ContactDTO contact) {
+
         updateButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                List<ContactDTO> listContact=new ArrayList<ContactDTO>();
+                List<ContactDTO> listContact = new ArrayList<ContactDTO>();
                 listContact.add(contact);
+                for (Integer key : _mapContactsAsActive.keySet()) {
+                    listContact.add(_mapContactsAsActive.get(key));
+                }
                 try {
                     _controller.setContactAsActive(listContact);
                     inactiveContacts.jPanelInactive.removeAll();
@@ -93,47 +96,42 @@ public class InactiveContacts extends javax.swing.JFrame {
                     mainWindow.setEnabled(true);
                     inactiveContacts.setVisible(false);
                 } catch (Exception ex) {
-                 
-                }               
+
+                }
             }
-            
+
         });
     }
-     
-     private void addCheckBoxContactEvent(final JCheckBox checkboxInactive, final ContactDTO contact)
-    {
-        
-        checkboxInactive.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                
-                if(checkboxInactive.isSelected()){
-                    _listContactsAsActive.add(contact);    
+
+    private void addCheckBoxContactEvent(final JCheckBox checkboxInactive, final ContactDTO contact) {
+
+        checkboxInactive.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                if (checkboxInactive.isSelected()) {
+                    _mapContactsAsActive.put(contact.getContactid(), contact);
                 }
-                if(!checkboxInactive.isSelected()){
-                    _listContactsAsActive.remove(contact);
-                }                
-                if(_listContactsAsActive.isEmpty()){
+                if (!checkboxInactive.isSelected()) {
+                    _mapContactsAsActive.remove(contact.getContactid());
+                }
+                if (_mapContactsAsActive.isEmpty()) {
                     applyButton.setEnabled(false);
-                }else{
+                } else {
                     applyButton.setEnabled(true);
                 }
-                
-                
             }
-            
         });
     }
-    
-    private void enableMainScreen()
-    {        
+
+    private void enableMainScreen() {
         mainWindow.setEnabled(true);
         mainWindow.toFront();
     }
-    private void center()
-    {
+
+    private void center() {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,7 +146,6 @@ public class InactiveContacts extends javax.swing.JFrame {
         jPanelInactive = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 450));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -219,8 +216,7 @@ public class InactiveContacts extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
-    public MainScreen getMainWindow() {        
+    public MainScreen getMainWindow() {
         return mainWindow;
     }
 
